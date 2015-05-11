@@ -24,17 +24,17 @@ public class AnalysisIkPlugin extends AbstractPlugin {
     }
 
 
-    @Override public void processModule(Module module) {
-        logger.info('really in processModule');
-        if (module instanceof AnalysisModule) {
-            logger.info('really in addProcessor');
-            AnalysisModule analysisModule = (AnalysisModule) module;
-            analysisModule.addProcessor(new IkAnalysisBinderProcessor());
-        }
-    }
+    //@Override public void processModule(Module module) {
+    //    logger.info("really in processModule");
+    //    if (module instanceof AnalysisModule) {
+    //        logger.info("really in addProcessor");
+    //        AnalysisModule analysisModule = (AnalysisModule) module;
+    //        analysisModule.addProcessor(new IkAnalysisBinderProcessor());
+    //    }
+    //}
     
     public void onModule(AnalysisModule module) {
-        logger.info('really in onModule');
+        logger.info("really in onModule");
         module.addProcessor(new IkAnalysisBinderProcessor());
     }
 }
