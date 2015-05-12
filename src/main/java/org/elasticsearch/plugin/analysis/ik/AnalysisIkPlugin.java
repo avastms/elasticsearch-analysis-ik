@@ -9,6 +9,8 @@ import org.elasticsearch.plugins.AbstractPlugin;
 import org.elasticsearch.common.logging.ESLogger;
 import org.elasticsearch.common.logging.Loggers;
 
+import org.elasticsearch.indices.analysis.ik.IKIndicesAnalysisModule;
+
 
 public class AnalysisIkPlugin extends AbstractPlugin {
 
@@ -23,7 +25,10 @@ public class AnalysisIkPlugin extends AbstractPlugin {
         return "ik analysis";
     }
 
-
+    @Override
+    public Collection<Class<? extends Module>> modules() {
+        return ImmutableList.<Class<? extends Module>>of(IKIndicesAnalysisModule.class);
+    }
     //@Override public void processModule(Module module) {
     //    logger.info("really in processModule");
     //    if (module instanceof AnalysisModule) {
