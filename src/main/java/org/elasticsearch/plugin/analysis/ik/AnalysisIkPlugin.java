@@ -6,17 +6,11 @@ import org.elasticsearch.index.analysis.AnalysisModule;
 import org.elasticsearch.index.analysis.IkAnalysisBinderProcessor;
 import org.elasticsearch.plugins.AbstractPlugin;
 
-
-import org.elasticsearch.common.logging.ESLogger;
-import org.elasticsearch.common.logging.Loggers;
-
 import org.elasticsearch.indices.analysis.ik.IKIndicesAnalysisModule;
 
 import java.util.Collection;
 
 public class AnalysisIkPlugin extends AbstractPlugin {
-
-    public static ESLogger logger=Loggers.getLogger("ik-analyzer");
 
     @Override public String name() {
         return "analysis-ik";
@@ -41,7 +35,6 @@ public class AnalysisIkPlugin extends AbstractPlugin {
     //}
     
     public void onModule(AnalysisModule module) {
-        logger.info("really in onModule");
         module.addProcessor(new IkAnalysisBinderProcessor());
     }
 }
