@@ -51,7 +51,7 @@ public class IKIndicesAnalysis extends AbstractComponent {
         final Settings stgs;
 
         this.env = new Enviroment(settings);
-        this.stgs = settings
+        this.stgs = settings;
 
         Dictionary.initial(new Configuration(env));
 
