@@ -1,6 +1,7 @@
 package org.elasticsearch.plugin.analysis.ik;
 
 import org.elasticsearch.common.inject.Module;
+import org.elasticsearch.common.collect.ImmutableList;
 import org.elasticsearch.index.analysis.AnalysisModule;
 import org.elasticsearch.index.analysis.IkAnalysisBinderProcessor;
 import org.elasticsearch.plugins.AbstractPlugin;
@@ -11,6 +12,7 @@ import org.elasticsearch.common.logging.Loggers;
 
 import org.elasticsearch.indices.analysis.ik.IKIndicesAnalysisModule;
 
+import java.util.Collection;
 
 public class AnalysisIkPlugin extends AbstractPlugin {
 

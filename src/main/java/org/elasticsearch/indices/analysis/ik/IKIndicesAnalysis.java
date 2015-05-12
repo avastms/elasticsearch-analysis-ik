@@ -47,14 +47,16 @@ public class IKIndicesAnalysis extends AbstractComponent {
     public IKIndicesAnalysis(Settings settings, IndicesAnalysisService indicesAnalysisService) {
         super(settings);
 
-        protected Enviroment env;
+        final Enviroment env;
+        final Settings stgs;
 
         this.env = new Enviroment(settings);
+        this.stgs = settings
 
         Dictionary.initial(new Configuration(env));
 
         // Register ik analyzer
-        indicesAnalysisService.analyzerProviderFactories().put("ik", new PreBuiltAnalyzerProviderFactory("smartcn", AnalyzerScope.INDICES, new IKAnalyzer(null, settings, env));
+        indicesAnalysisService.analyzerProviderFactories().put("ik", new PreBuiltAnalyzerProviderFactory("smartcn", AnalyzerScope.INDICES, new IKAnalyzer(null, stgs, env)));
 
         // Register ik tokenizer
         indicesAnalysisService.tokenizerFactories().put("ik", new PreBuiltTokenizerFactoryFactory(new TokenizerFactory() {
@@ -65,7 +67,7 @@ public class IKIndicesAnalysis extends AbstractComponent {
 
             @Override
             public Tokenizer create(Reader reader) {
-                return new IKTokenizer(reader, settings, env);
+                return new IKTokenizer(reader, stgs, env);
             }
         }));
 
