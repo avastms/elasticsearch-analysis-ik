@@ -47,11 +47,9 @@ public class IKIndicesAnalysis extends AbstractComponent {
     public IKIndicesAnalysis(Settings settings, IndicesAnalysisService indicesAnalysisService) {
         super(settings);
 
-        final Enviroment env;
-        final Settings stgs;
+        final Environment env = new Environment(settings);
 
-        this.env = new Enviroment(settings);
-        this.stgs = settings;
+        final Settings stgs = settings;
 
         Dictionary.initial(new Configuration(env));
 
