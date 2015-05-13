@@ -54,7 +54,7 @@ public class IKIndicesAnalysis extends AbstractComponent {
         Dictionary.initial(new Configuration(env));
 
         // Register ik analyzer
-        indicesAnalysisService.analyzerProviderFactories().put("ik", new PreBuiltAnalyzerProviderFactory("smartcn", AnalyzerScope.INDICES, new IKAnalyzer(null, stgs, env)));
+        indicesAnalysisService.analyzerProviderFactories().put("ik", new PreBuiltAnalyzerProviderFactory("ik", AnalyzerScope.INDICES, new IKAnalyzer(null, stgs, env)));
 
         // Register ik tokenizer
         indicesAnalysisService.tokenizerFactories().put("ik", new PreBuiltTokenizerFactoryFactory(new TokenizerFactory() {
