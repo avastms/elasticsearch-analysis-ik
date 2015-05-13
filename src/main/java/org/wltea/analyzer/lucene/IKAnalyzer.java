@@ -67,12 +67,11 @@ public final class IKAnalyzer extends Analyzer{
 		this.useSmart = useSmart;
 	}
 
-    Settings settings=ImmutableSettings.EMPTY;
     Environment environment=new Environment();
 
-    public IKAnalyzer(Settings indexSetting,Settings settings, Environment environment) {
+    public IKAnalyzer(Settings indexSetting, boolean useSmart, Environment environment) {
         super();
-        this.settings=settings;
+        this.useSmart=useSmart;
         this.environment= environment;
     }
 
@@ -81,7 +80,7 @@ public final class IKAnalyzer extends Analyzer{
 	 */
 	@Override
 	protected TokenStreamComponents createComponents(String fieldName, final Reader in) {
-		Tokenizer _IKTokenizer = new IKTokenizer(in , settings, environment);
+		Tokenizer _IKTokenizer = new IKTokenizer(in , useSmart, environment);
 		return new TokenStreamComponents(_IKTokenizer);
 	}
 

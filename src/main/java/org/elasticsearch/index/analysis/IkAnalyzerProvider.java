@@ -16,11 +16,14 @@ public class IkAnalyzerProvider extends AbstractIndexAnalyzerProvider<IKAnalyzer
     @Inject
     public IkAnalyzerProvider(Index index, @IndexSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) {
         super(index, indexSettings, name, settings);
+        boolean useSmart;
         Dictionary.initial(new Configuration(env));
-        analyzer=new IKAnalyzer(indexSettings, settings, env);
+        useSmart = settings.get("use_smart", "false").equals("true");
+        analyzer=new IKAnalyzer(indexSettings, useSmart, env);
     }
 
     @Override public IKAnalyzer get() {
         return this.analyzer;
     }
 }
+

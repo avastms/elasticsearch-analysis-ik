@@ -56,15 +56,16 @@ public final class IKSegmenter {
 	 * IK分词器构造函数
 	 * @param input
      */
-	public IKSegmenter(Reader input , Settings settings, Environment environment){
+	public IKSegmenter(Reader input , boolean useSmart, Environment environment){
 		this.input = input;
 		this.cfg = new Configuration(environment);
-        this.useSmart = settings.get("use_smart", "false").equals("true");
+        this.useSmart = useSmart;
+        //this.useSmart = settings.get("use_smart", "false").equals("true");
         this.init();
 	}
 	
 	public IKSegmenter(Reader input){
-		new IKSegmenter(input, null,null);
+		new IKSegmenter(input, false, null);
 	}
 	
 //	/**

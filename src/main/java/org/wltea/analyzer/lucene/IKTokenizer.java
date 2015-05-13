@@ -66,14 +66,14 @@ public final class IKTokenizer extends Tokenizer {
 	 * Lucene 4.0 Tokenizer适配器类构造函数
 	 * @param in
      */
-	public IKTokenizer(Reader in , Settings settings, Environment environment){
+	public IKTokenizer(Reader in , boolean useSmart, Environment environment){
 	    super(in);
 	    offsetAtt = addAttribute(OffsetAttribute.class);
 	    termAtt = addAttribute(CharTermAttribute.class);
 	    typeAtt = addAttribute(TypeAttribute.class);
         posIncrAtt = addAttribute(PositionIncrementAttribute.class);
 
-        _IKImplement = new IKSegmenter(input , settings, environment);
+        _IKImplement = new IKSegmenter(input , useSmart, environment);
 	}
 
 	/* (non-Javadoc)

@@ -49,12 +49,16 @@ public class IKIndicesAnalysis extends AbstractComponent {
 
         final Environment env = new Environment(settings);
 
-        final Settings stgs = settings;
+        final boolean useSmart;
+
+        useSmart = settings.get("use_smart", "false").equals("true");
 
         Dictionary.initial(new Configuration(env));
 
         // Register ik analyzer
-        indicesAnalysisService.analyzerProviderFactories().put("ik", new PreBuiltAnalyzerProviderFactory("ik", AnalyzerScope.INDICES, new IKAnalyzer(null, stgs, env)));
+        indicesAnalysisService.analyzerProviderFactories().put("ik", new PreBuiltAnalyzerProviderFactory("ik", AnalyzerScope.INDICES, new IKAnalyzer(null, useSmart, env)));
+        indicesAnalysisService.analyzerProviderFactories().put("ik_smart", new PreBuiltAnalyzerProviderFactory("ik_smart", AnalyzerScope.INDICES, new IKAnalyzer(null, true, env)));
+        indicesAnalysisService.analyzerProviderFactories().put("ik_max_word", new PreBuiltAnalyzerProviderFactory("ik_max_word", AnalyzerScope.INDICES, new IKAnalyzer(null, false, env)));
 
         // Register ik tokenizer
         indicesAnalysisService.tokenizerFactories().put("ik", new PreBuiltTokenizerFactoryFactory(new TokenizerFactory() {
@@ -65,7 +69,31 @@ public class IKIndicesAnalysis extends AbstractComponent {
 
             @Override
             public Tokenizer create(Reader reader) {
-                return new IKTokenizer(reader, stgs, env);
+                return new IKTokenizer(reader, useSmart, env);
+            }
+        }));
+
+        indicesAnalysisService.tokenizerFactories().put("ik_smart", new PreBuiltTokenizerFactoryFactory(new TokenizerFactory() {
+            @Override
+            public String name() {
+                return "ik";
+            }
+
+            @Override
+            public Tokenizer create(Reader reader) {
+                return new IKTokenizer(reader, true, env);
+            }
+        }));
+
+        indicesAnalysisService.tokenizerFactories().put("ik_max_word", new PreBuiltTokenizerFactoryFactory(new TokenizerFactory() {
+            @Override
+            public String name() {
+                return "ik";
+            }
+
+            @Override
+            public Tokenizer create(Reader reader) {
+                return new IKTokenizer(reader, false, env);
             }
         }));
 

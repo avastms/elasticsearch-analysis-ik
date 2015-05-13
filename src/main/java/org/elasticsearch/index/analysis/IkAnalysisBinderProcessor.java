@@ -5,6 +5,8 @@ public class IkAnalysisBinderProcessor extends AnalysisModule.AnalysisBinderProc
 
     @Override public void processAnalyzers(AnalyzersBindings analyzersBindings) {
         analyzersBindings.processAnalyzer("ik", IkAnalyzerProvider.class);
+        analyzersBindings.processAnalyzer("ik_smart", IkSmartAnalyzerProvider.class);
+        analyzersBindings.processAnalyzer("ik_max_word", IkMaxWordAnalyzerProvider.class);
 //        super.processAnalyzers(analyzersBindings);
     }
 
@@ -12,6 +14,8 @@ public class IkAnalysisBinderProcessor extends AnalysisModule.AnalysisBinderProc
     @Override
     public void processTokenizers(TokenizersBindings tokenizersBindings) {
       tokenizersBindings.processTokenizer("ik", IkTokenizerFactory.class);
+      tokenizersBindings.processTokenizer("ik_smart", IkSmartTokenizerFactory.class);
+      tokenizersBindings.processTokenizer("ik_max_word", IkMaxWordTokenizerFactory.class);
 //      super.processTokenizers(tokenizersBindings);
     }
 }

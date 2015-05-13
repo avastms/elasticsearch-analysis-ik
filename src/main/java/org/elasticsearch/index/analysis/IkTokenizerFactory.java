@@ -15,19 +15,19 @@ import java.io.Reader;
 
 public class IkTokenizerFactory extends AbstractTokenizerFactory {
   private Environment environment;
-  private Settings settings;
+  private boolean useSmart;
 
   @Inject
   public IkTokenizerFactory(Index index, @IndexSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) {
 	  super(index, indexSettings, name, settings);
 	  this.environment = env;
-	  this.settings = settings;
+    this.useSmart = settings.get("use_smart", "false").equals("true");
 	  Dictionary.initial(new Configuration(env));
   }
 
   @Override
   public Tokenizer create(Reader reader) {
-	  return new IKTokenizer(reader, settings, environment);
+	  return new IKTokenizer(reader, useSmart, environment);
   }
 
 }
